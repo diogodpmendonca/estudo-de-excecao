@@ -1,53 +1,57 @@
 # estudo-de-excecao
 exercício resolvido da unidade de exceções do curso de java orientado a objetos
 
-Fazer um programa para ler os dados de uma conta bancária e depois realizar um
-saque nesta conta bancária, mostrando o novo saldo. Um saque não pode ocorrer
-ou se não houver saldo na conta, ou se o valor do saque for superior ao limite de
-saque da conta. Implemente a conta bancária conforme projeto abaixo:
+Fazer um programa para ler os dados de uma reserva de hotel (número do quarto, data
+de entrada e data de saída) e mostrar os dados da reserva, inclusive sua duração em
+dias. Em seguida, ler novas datas de entrada e saída, atualizar a reserva, e mostrar
+novamente a reserva com os dados atualizados. O programa não deve aceitar dados
+inválidos para a reserva, conforme as seguintes regras:
+- Alterações de reserva só podem ocorrer para datas futuras
+- A data de saída deve ser maior que a data de entrada
+
 
 esquema da classe
 ____________________________________
-ACCOUNT
+RESERVATION
 -----------------
--number: Integer
--holder: String
--balance: Double
--withdralwL: Double
+- roomNumber: Integer
+- checkin: Date
+- checkout: Date
 -------------------
-+ deposit(amont: Double): void
-+ whithdraw(amont: Double) : void
++ duration(): Integer
++ updateDates(checkin: Date, chekout: Date): void
 ___________________________________
 
 Examples
-Enter account data
-Number: 8021
-Holder: Bob Brown
-Initial balance: 500.00
-Withdraw limit: 300.00
-Enter amount for withdraw: 100.00
-New balance: 400.00
 
-Enter account data
-Number: 8021
-Holder: Bob Brown
-Initial balance: 500.00
-Withdraw limit: 300.00
-Enter amount for withdraw: 400.00
-Withdraw error: The amount exceeds withdraw limit
+Room number: 8021
+Check-in date (dd/MM/yyyy): 23/09/2019
+Check-out date (dd/MM/yyyy): 26/09/2019
+Reservation: Room 8021, check-in: 23/09/2019, check-out: 26/09/2019, 3 nights
+Enter data to update the reservation:
+Check-in date (dd/MM/yyyy): 24/09/2019
+Check-out date (dd/MM/yyyy): 29/09/2019
+Reservation: Room 8021, check-in: 24/09/2019, check-out: 29/09/2019, 5 nights
 
-Enter account data
-Number: 8021
-Holder: Bob Brown
-Initial balance: 500.00
-Withdraw limit: 300.00
-Enter amount for withdraw: 800.00
-Withdraw error: The amount exceeds withdraw limit
+Room number: 8021
+Check-in date (dd/MM/yyyy): 23/09/2019
+Check-out date (dd/MM/yyyy): 21/09/2019
+Error in reservation: Check-out date must be after check-in date
 
-Enter account data
-Number: 8021
-Holder: Bob Brown
-Initial balance: 200.00
-Withdraw limit: 300.00
-Enter amount for withdraw: 250.00
-Withdraw error: Not enough balance
+Room number: 8021
+Check-in date (dd/MM/yyyy): 23/09/2019
+Check-out date (dd/MM/yyyy): 26/09/2019
+Reservation: Room 8021, check-in: 23/09/2019, check-out: 26/09/2019, 3 nights
+Enter data to update the reservation:
+Check-in date (dd/MM/yyyy): 24/09/2015
+Check-out date (dd/MM/yyyy): 29/09/2015
+Error in reservation: Reservation dates for update must be future dates
+
+Room number: 8021
+Check-in date (dd/MM/yyyy): 23/09/2019
+Check-out date (dd/MM/yyyy): 26/09/2019
+Reservation: Room 8021, check-in: 23/09/2019, check-out: 26/09/2019, 3 nights
+Enter data to update the reservation:
+Check-in date (dd/MM/yyyy): 24/09/2020
+Check-out date (dd/MM/yyyy): 22/09/2020
+Error in reservation: Check-out date must be after check-in date
