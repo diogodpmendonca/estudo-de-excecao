@@ -26,6 +26,7 @@ public class Program {
 		if(!checkOut.after(checkIn)) {
 			System.out.println("Reserva com erro: a data de Check-Out é anteriaor a data de Check-in");
 		}else {
+			
 			Reservation res = new Reservation(roomNumber, checkIn, checkOut);
 			System.out.println("Reserva: "+res.toString());
 			
@@ -34,17 +35,15 @@ public class Program {
 			checkIn = sdf.parse(sc.next());
 			System.out.println("CheckOut ");
 			checkOut = sdf.parse(sc.next());
-			Date now = new Date();
 			
-			if(checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Atualização de Reserva com erro: Atualizações só pódem ser "
-						+ "realizadas para datas futuras");
-			}else if( !checkOut.after(checkIn)) {
-				System.out.println("Atualização de Reserva com erro: a data de Check-Out é anteriaor a data de Check-in");
+			String erro = res.updateDates(checkIn, checkOut);
+			if(erro != null) {
+				System.out.println("Erro na reserva: "+erro);
 			}else {
-				res.updateDates(checkIn, checkOut);
 				System.out.println("Atualização: "+res.toString());
 			}
+		
+			
 		}
 		
 		sc.close();

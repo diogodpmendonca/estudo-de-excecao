@@ -13,9 +13,11 @@ public class Reservation {
 	private Date checkOut;	
 
 	public Reservation(Integer roomNumber, Date checkin, Date checkout) {
-		this.roomNumber = roomNumber;
-		this.checkIn = checkin;
-		this.checkOut = checkout;
+			this.roomNumber = roomNumber;
+			this.checkIn = checkin;
+			this.checkOut = checkout;
+		
+
 	}
 
 	public Integer getRoomNumber() {
@@ -39,9 +41,17 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 	
-	public void updateDates(Date checkIn, Date checkOut) {
+	public String updateDates(Date checkIn, Date checkOut) {
+		Date now = new Date();
+		if(checkIn.before(now) || checkOut.before(now)) {
+			return "Atualizações só pódem ser realizadas para datas futuras";
+		}
+		if( !checkOut.after(checkIn)) {
+			return "data de Check-Out é anteriaor a data de Check-in";
+		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		return null;
 	}
 
 	@Override
