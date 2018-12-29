@@ -10,23 +10,22 @@ import model.entities.Reservation;
 
 public class Program {
 	
-	public static void main(String[] arg) throws ParseException {
+	public static void main(String[] arg) {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Qual Quarto Deseja? ");
-		int roomNumber = sc.nextInt();
-		System.out.println("Quando fará checkIn? Exemplo dd/mm/yyy");
-		Date checkIn = sdf.parse(sc.next());
-		System.out.println("Quando fará checkOut? Exemplo dd/mm/yyy");
-		Date checkOut = sdf.parse(sc.next());
-		
-		if(!checkOut.after(checkIn)) {
-			System.out.println("Reserva com erro: a data de Check-Out é anteriaor a data de Check-in");
-		}else {
+		try {
 			
+			System.out.println("Qual Quarto Deseja? ");
+			int roomNumber = sc.nextInt();
+			System.out.println("Quando fará checkIn? Exemplo dd/mm/yyy");
+			Date checkIn = sdf.parse(sc.next());
+			System.out.println("Quando fará checkOut? Exemplo dd/mm/yyy");
+			Date checkOut = sdf.parse(sc.next());
+			
+				
 			Reservation res = new Reservation(roomNumber, checkIn, checkOut);
 			System.out.println("Reserva: "+res.toString());
 			
@@ -36,14 +35,16 @@ public class Program {
 			System.out.println("CheckOut ");
 			checkOut = sdf.parse(sc.next());
 			
-			String erro = res.updateDates(checkIn, checkOut);
-			if(erro != null) {
-				System.out.println("Erro na reserva: "+erro);
-			}else {
-				System.out.println("Atualização: "+res.toString());
-			}
-		
+			res.updateDates(checkIn, checkOut);
 			
+			System.out.println("Atualização: "+res.toString());
+			
+		}
+		catch (ParseException e) {
+			System.out.println("Data informada de forma incorreta");
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println("Erro: "+e.getMessage());
 		}
 		
 		sc.close();

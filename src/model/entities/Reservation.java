@@ -41,17 +41,18 @@ public class Reservation {
 		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 	
-	public String updateDates(Date checkIn, Date checkOut) {
+	public void updateDates(Date checkIn, Date checkOut) {
 		Date now = new Date();
+		
 		if(checkIn.before(now) || checkOut.before(now)) {
-			return "Atualizações só pódem ser realizadas para datas futuras";
+			throw new IllegalArgumentException("Atualizações só pódem ser realizadas para datas futuras");
 		}
 		if( !checkOut.after(checkIn)) {
-			return "data de Check-Out é anteriaor a data de Check-in";
+			throw new IllegalArgumentException("data de Check-Out é anteriaor a data de Check-in");
 		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		return null;
+		
 	}
 
 	@Override
