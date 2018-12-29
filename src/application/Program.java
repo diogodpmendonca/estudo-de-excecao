@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Reservation;
+import model.exception.DomainException;
 
 public class Program {
 	
@@ -43,8 +44,12 @@ public class Program {
 		catch (ParseException e) {
 			System.out.println("Data informada de forma incorreta");
 		}
-		catch (IllegalArgumentException e) {
+		catch (DomainException  e) {
 			System.out.println("Erro: "+e.getMessage());
+		}
+		catch (RuntimeException e) {
+			sc.next();
+			System.out.println("Erro inesperado\n"+e.getMessage());
 		}
 		
 		sc.close();
